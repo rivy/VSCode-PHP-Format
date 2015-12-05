@@ -8,7 +8,7 @@
 
 ### Bug
 * If you found bug or you have an idea, let me now on GitHub :)
-* https://github.com/kasik96/VSCode-Indent-Format
+* https://github.com/kasik96/VSCode-PHP-Format
 
 ### Thanks to
 * UW CSE Indenter Tool - http://goo.gl/FWGCha

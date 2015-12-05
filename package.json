@@ -13,13 +13,13 @@
 		"theme": "dark"
 	},
 	"bugs": {
-		"url": "https://github.com/kasik96/VSCode-Indent-Format/issues",
+		"url": "https://github.com/kasik96/VSCode-PHP-Format/issues",
 		"email": "kasemartin@icloud.com"
 	},
-	"homepage": "https://github.com/kasik96/VSCode-Indent-Format",
+	"homepage": "https://github.com/kasik96/VSCode-PHP-Format",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/kasik96/VSCode-Indent-Format"
+		"url": "https://github.com/kasik96/VSCode-PHP-Format"
 	},
 	"categories": [
 		"Other"
