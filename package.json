@@ -1,0 +1,37 @@
+{
+	"name": "format-indent",
+	"displayName": "PHP Format indent",
+	"description": "Format indent for PHP language",
+	"version": "0.0.5",
+	"publisher": "Kasik96",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"icon": "media/icon.png",
+	"galleryBanner": {
+		"color": "#0000FF",
+		"theme": "dark"
+	},
+	"bugs": {
+		"url": "https://github.com/kasik96/VSCode-Indent-Format/issues",
+		"email": "kasemartin@icloud.com"
+	},
+	"homepage": "https://github.com/kasik96/VSCode-Indent-Format",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kasik96/VSCode-Indent-Format"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:php"
+	],
+	"main": "./extension",
+	"dependencies": {
+		"js-beautify": "^1.5.10"
+	},
+	"devDependencies": {
+		"vscode": "0.10.x"
+	}
+}
