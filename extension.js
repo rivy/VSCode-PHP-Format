@@ -10,12 +10,34 @@ function format(document, range, options) {
     var result = [];
     var content = document.getText(range);
     var formatted = Indentation(content);
-	var newFormatted = beautify(formatted, { indent_size: 2 });
-	
-    if (newFormatted) {
-        result.push(new vscode.TextEdit(range, newFormatted));
+    var newFormatted = beautify(formatted, { indent_size: 2 });
+
+    var index = 0;
+    var newFormatted1;
+    var newFormatted2;
+
+    newFormatted1 = replaceAll(newFormatted, '[" ', '["');
+
+    newFormatted2 = replaceAll(newFormatted1, ' "]', '"]');
+
+    if (newFormatted2) {
+        result.push(new vscode.TextEdit(range, newFormatted2));
     }
+
     return result;
+}
+
+function replaceAll(str, find, replace) {
+    var i = str.indexOf(find);
+    if (i > -1) {
+        str = str.replace(find, replace);
+        i = i + replace.length;
+        var st2 = str.substring(i);
+        if (st2.indexOf(find) > -1) {
+            str = str.substring(0, i) + replaceAll(st2, find, replace);
+        }
+    }
+    return str;
 }
 
 function Indentation(oString) {
@@ -77,11 +99,11 @@ function Indentation(oString) {
         }
         if ((((lbrackets.length == 0 && rbrackets.length == 0))
             &&
-			((lineForMatching.match(/(if |while )[ \t]*([^)]*)/) && !lineForMatching.match(/;/)) ||
-				(lineForMatching.match(/(for )[ \t]*([^)]*)/)) ||
-				(lineForMatching.match(/else/) &&
-					(!lineForMatching.match(/else[ ]+if/) &&
-						(lbrackets.length == 0 || lbrackets.length > rbrackets.length)))))
+            ((lineForMatching.match(/(if |while )[ \t]*([^)]*)/) && !lineForMatching.match(/;/)) ||
+                (lineForMatching.match(/(for )[ \t]*([^)]*)/)) ||
+                (lineForMatching.match(/else/) &&
+                    (!lineForMatching.match(/else[ ]+if/) &&
+                        (lbrackets.length == 0 || lbrackets.length > rbrackets.length)))))
             || trim(lineForMatching).match(/}[ \t]*else$/)) {
             increaseIndentAfter = true;
             indentDuration = 1;
@@ -122,7 +144,7 @@ function trim(str) {
 }
 
 function activate(context) {
-	context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider('php', {
+    context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider('php', {
         provideDocumentFormattingEdits: function (document, options, token) {
             return format(document, null, options);
         }
