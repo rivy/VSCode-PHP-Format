@@ -47,6 +47,7 @@ function Indentation(oString) {
     var indentLevel = 0;
     var indentDuration = 0;
     var newLines = [];
+    var caseMode = false;
     var inMultiLineComment = false;
     var lines = code.split(/[\r]?\n/gi);
     for (var i = 0; i < lines.length; i++) {
@@ -97,16 +98,21 @@ function Indentation(oString) {
                 decreaseIndentAfter = true;
             }
         }
-        if ((((lbrackets.length == 0 && rbrackets.length == 0))
-            &&
-            ((lineForMatching.match(/(if |while )[ \t]*([^)]*)/) && !lineForMatching.match(/;/)) ||
-                (lineForMatching.match(/(for )[ \t]*([^)]*)/)) ||
-                (lineForMatching.match(/else/) &&
-                    (!lineForMatching.match(/else[ ]+if/) &&
-                        (lbrackets.length == 0 || lbrackets.length > rbrackets.length)))))
-            || trim(lineForMatching).match(/}[ \t]*else$/)) {
+        if ((((lbrackets.length == 0 && rbrackets.length == 0)) && ((lineForMatching.match(/(if |while )[ \t]*([^)]*)/) && !lineForMatching.match(/;/)) || (lineForMatching.match(/(for )[ \t]*([^)]*)/)) || (lineForMatching.match(/else/) &&
+            (!lineForMatching.match(/else[ ]+if/) && (lbrackets.length == 0 || lbrackets.length > rbrackets.length))))) || trim(lineForMatching).match(/}[ \t]*else$/)) {
             increaseIndentAfter = true;
             indentDuration = 1;
+        }
+        if ((lineForMatching.match(/case/) && lineForMatching.match(/:/)) || (lineForMatching.match(/default/) && lineForMatching.match(/:/))) {
+            increaseIndentAfter = true;
+            caseMode = true;
+        }
+        if (lineForMatching.match(/break;/)) {
+            decreaseIndentAfter = true;
+        }
+        if (lineForMatching.match(/}/) && caseMode == true) {
+            indentLevel--;
+            caseMode = false;
         }
         if (increaseIndentBefore) {
             indentLevel++;
@@ -128,7 +134,9 @@ function Indentation(oString) {
     newCode = newLines.join("\n");
     return newCode;
 }
+
 exports.Indentation = Indentation;
+
 function ltrim(str) {
     for (var k = 0; k < str.length && str.charAt(k) <= " "; k++)
         ;
@@ -157,4 +165,5 @@ function activate(context) {
         }
     }));
 }
+
 exports.activate = activate;
