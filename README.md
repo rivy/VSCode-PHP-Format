@@ -1,8 +1,8 @@
 # README
-## This is the README for extension PHP Format intend
+## This is the README for extension PHP Format
 
 * PHP Formator for VS Code using native VS Code format system.
-* Formator use basic rules of indent format system.
+* Formator use basic rules of indent format system and PHP Style Standards.
 * You can use classic format shortcut or 'format' button in menu.
 * Now its WORKS with PHP and HTML in one file!
 
@@ -11,10 +11,10 @@
 * https://github.com/kasik96/VSCode-PHP-Format
 
 ### Thanks to
-* UW CSE Indenter Tool - http://goo.gl/FWGCha
+* beautifier - https://www.npmjs.com/package/beautifier
+* js-beautify - https://www.npmjs.com/package/js-beautify
 * Microsoft - https://www.microsoft.com/
 * Sean McBreen 
-* js-beautify - https://www.npmjs.com/package/js-beautify
 
 
 **Made with ♥ and VSCode. Enjoy!**
