@@ -20,17 +20,17 @@ function format(document, range, options) {
         nextNumber++;
         var firstBracket = stringHTML.indexOf("<?php");
         var secondBracket = stringHTML.indexOf("?>");
-        fieldPHP.push(stringHTML.substring(firstBracket, secondBracket + 2));
-        var find = stringHTML.substring(firstBracket, secondBracket + 2);
+        fieldPHP.push(stringHTML.substring(firstBracket, secondBracket + editor.tabSize));
+        var find = stringHTML.substring(firstBracket, secondBracket + editor.tabSize);
         stringHTML = stringHTML.replace(find, "<!--Replace" + nextNumber + "-->");
     }
 
-    stringHTML = beautify(stringHTML, { indent_size: 2 });
+    stringHTML = beautify(stringHTML, { indent_size: editor.tabSize });
 
     for (var index = 0; index < fieldPHP.length; index++) {
         var change1 = fieldPHP[index].replace("<?php", "//firstCH\n");
         var change2 = change1.replace("?>", "//secondCH\n");
-        var clear1 = beautifier.js_beautify(change2, { indent_size: 2 });
+        var clear1 = beautifier.js_beautify(change2, { indent_size: editor.tabSize });
         var clear2 = clear1.replace("//firstCH", "<?php");
         var clear3 = clear2.replace("//secondCH", "?>");
         var clear4 = clear3.split('- >').join('->');
